@@ -49,6 +49,9 @@
 #include "../multi_heap_platform.h"
 #include "../heap_private.h"
 
+//Hardware RNG support.
+#include "esp32_rng.h"
+
 STATIC mp_obj_t esp32_wake_on_touch(const mp_obj_t wake) {
 
     if (machine_rtc_config.ext0_pin != -1) {
@@ -217,6 +220,11 @@ STATIC const mp_rom_map_elem_t esp32_module_globals_table[] = {
 
     { MP_ROM_QSTR(MP_QSTR_HEAP_DATA), MP_ROM_INT(MALLOC_CAP_8BIT) },
     { MP_ROM_QSTR(MP_QSTR_HEAP_EXEC), MP_ROM_INT(MALLOC_CAP_EXEC) },
+
+    //hardware RNG
+    { MP_ROM_QSTR(MP_QSTR_rng), MP_ROM_PTR(&esp32_rng_get_random) },
+
+
 };
 
 STATIC MP_DEFINE_CONST_DICT(esp32_module_globals, esp32_module_globals_table);
